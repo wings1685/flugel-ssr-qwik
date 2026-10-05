@@ -1,25 +1,18 @@
 import { component$ } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$ } from "@builder.io/qwik-city";
+import { apiFetch } from "@/_global/lib/api";
+import { buildFindQuery } from "@/server/db/tasks/fetchTasks";
+import Page from "@/components/routes/Page";
+import type { TaskItem } from "@/server/db/types";
 
-export default component$(() => {
-  return (
-    <>
-      <h1>Hi 👋</h1>
-      <div>
-        Can't wait to see what you build with qwik!
-        <br />
-        Happy coding.
-      </div>
-    </>
-  );
+export const useFetchData = routeLoader$(async ({ url }) => {
+	const findQuery = buildFindQuery(url);
+
+	return await apiFetch<TaskItem[]>('/tasks', findQuery);
 });
 
-export const head: DocumentHead = {
-  title: "Welcome to Qwik",
-  meta: [
-    {
-      name: "description",
-      content: "Qwik site description",
-    },
-  ],
-};
+export default component$(() => {
+	const data = useFetchData();
+
+	return <Page tasks={ data.value } />;
+});
