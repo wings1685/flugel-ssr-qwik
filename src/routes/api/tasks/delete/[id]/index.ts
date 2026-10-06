@@ -8,7 +8,7 @@ export const onDelete: RequestHandler = async ({ params, json }) => {
 		id: +(params.id ?? ''),
 	};
 	const result = validateSafeParse(deleteTaskSchema, input);
-	if (!result.success) throw new ServerError(400, 'Missing fields');
+	if (!result.success) throw new ServerError(400, { message: 'Missing fields' });
 
 	await deleteTask(result.output);
 
