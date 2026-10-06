@@ -4,13 +4,14 @@ import { buildFindQuery, fetchTasks } from "@/server/db/tasks/fetchTasks";
 import Page from "@/components/routes/Page";
 
 export const useFetchData = routeLoader$(async ({ url }) => {
-	const findQuery = buildFindQuery(url);
+	const findQuery = buildFindQuery(url.search);
+	const tasks = await fetchTasks(findQuery);
 
-	return await fetchTasks(findQuery);
+	return { tasks, findQuery }
 });
 
 export default component$(() => {
 	const data = useFetchData();
 
-	return <Page tasks={ data.value } />;
+	return <Page { ...data.value } />;
 });

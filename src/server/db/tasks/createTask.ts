@@ -2,9 +2,8 @@ import { db } from "../";
 import { task, taskDetail } from "../schema";
 import type { CreateTaskSchema } from "@/_global/lib/validate";
 import type { TaskDetail } from "../types.ts";
-import type { DeepGuard } from "@/_global/lib/types.js";
 
-export const createTask = async (values: DeepGuard<CreateTaskSchema>) => {
+export const createTask = async (values: CreateTaskSchema) => {
 	const { title, text } = values;
 
 	const taskData: Pick<CreateTaskSchema, 'title'> = { title };

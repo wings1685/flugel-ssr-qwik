@@ -2,9 +2,8 @@ import { eq } from "drizzle-orm";
 import { db } from "../";
 import { task, taskDetail } from "../schema";
 import type { DeleteTaskSchema } from "@/_global/lib/validate";
-import type { DeepGuard } from "@/_global/lib/types.js";
 
-export const deleteTask = async (values: DeepGuard<DeleteTaskSchema>) => {
+export const deleteTask = async (values: DeleteTaskSchema) => {
 	const { id } = values;
 
 	await db.transaction(async (tx) => {

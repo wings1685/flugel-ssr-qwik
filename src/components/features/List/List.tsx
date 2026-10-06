@@ -3,7 +3,6 @@ import { server$, useNavigate } from "@builder.io/qwik-city";
 import { updateTask } from "@/server/db/tasks/updateTask";
 import { deleteTask } from "@/server/db/tasks/deleteTask";
 import type { TaskItem } from "@/server/db/types";
-import type { PageProps } from "@/_global/lib/types";
 
 type DataId = TaskItem['id'];
 
@@ -17,7 +16,11 @@ const deleteData = server$(async (id: DataId) => {
 	await deleteTask({ id });
 });
 
-export default component$((props: PageProps) => {
+type Props = {
+	tasks: TaskItem[];
+};
+
+export default component$((props: Props) => {
 	const tasks = useSignal<TaskItem[]>([]);
 	const navigate = useNavigate();
 

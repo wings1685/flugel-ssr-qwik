@@ -1,12 +1,17 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, type PropsOf } from "@builder.io/qwik";
 import { Form, Find, List } from "@/components/features";
-import type { PageProps } from "@/_global/lib/types";
 
-export default component$((props: PageProps) => {
+type ListProps = PropsOf<typeof List>;
+type FindProps = PropsOf<typeof Find>;
+type Props = ListProps & {
+	findQuery: FindProps;
+};
+
+export default component$((props: Props) => {
 	return (
 		<main>
 			<Form />
-			<Find />
+			<Find { ...props.findQuery } />
 			<List tasks={ props.tasks } />
 		</main>
 	)
