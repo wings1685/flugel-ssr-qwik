@@ -21,7 +21,6 @@ export const fetchTasks = async (findQuery: FindSchema) => {
 		.select({
 			id: task.id,
 			title: task.title,
-			updated_at: task.updated_at,
 			text: taskDetail.text,
 		})
 		.from(task)

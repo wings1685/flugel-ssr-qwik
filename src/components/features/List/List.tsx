@@ -2,13 +2,11 @@ import { $, component$, useSignal, useTask$ } from "@builder.io/qwik";
 import { server$, useNavigate } from "@builder.io/qwik-city";
 import { updateTask } from "@/server/db/tasks/updateTask";
 import { deleteTask } from "@/server/db/tasks/deleteTask";
-import type { TaskItem } from "@/server/db/types";
+import type { TaskSchema } from "@/_global/lib/validate";
 
-type DataId = TaskItem['id'];
+type DataId = TaskSchema['id'];
 
-const editData = server$(async (id: DataId, data?: TaskItem) => {
-	if (!data) throw new Error('Task Not Found.');
-
+const editData = server$(async (data?: TaskSchema) => {
 	await updateTask(data);
 });
 
@@ -17,11 +15,11 @@ const deleteData = server$(async (id: DataId) => {
 });
 
 type Props = {
-	tasks: TaskItem[];
+	tasks: TaskSchema[];
 };
 
 export default component$((props: Props) => {
-	const tasks = useSignal<TaskItem[]>([]);
+	const tasks = useSignal<TaskSchema[]>([]);
 	const navigate = useNavigate();
 
 	useTask$(({ track }) => {
@@ -32,7 +30,7 @@ export default component$((props: Props) => {
 
 	const handleEdit$ = $(async (id: DataId) => {
 		const data = tasks.value.find(d => d.id === id);
-		await editData(id, data);
+		await editData(data);
 
 		await navigate('/', { forceReload: true });
 	});

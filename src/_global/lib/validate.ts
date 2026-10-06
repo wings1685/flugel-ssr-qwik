@@ -20,14 +20,12 @@ export const taskSchema = v.object({
 	id: v.pipe(v.number()),
 	title: v.pipe(v.string(), v.nonEmpty()),
 	text: v.pipe(v.string(), v.nonEmpty()),
-	updated_at: v.nullable(v.date()),
 }) satisfies v.GenericSchema<TaskData>;
 export type TaskSchema = v.InferInput<typeof taskSchema>;
 export const defaultTaskValues: TaskSchema = {
 	id: 0,
 	title: '',
 	text: '',
-	updated_at: null,
 };
 
 export const findSchema = v.object({
@@ -40,21 +38,11 @@ export const defaultFindValues: FindSchema = {
 	sort: 'desc',
 };
 
-const omitToCreateTask = ['id', 'updated_at'] as const;
+const omitToCreateTask = ['id'] as const;
 type CreateTaskFormData = Omit<TaskData, (typeof omitToCreateTask)[number]>;
 export const createTaskSchema = v.omit(taskSchema, omitToCreateTask) satisfies v.GenericSchema<CreateTaskFormData>;
 export type CreateTaskSchema = v.InferInput<typeof createTaskSchema>;
 export const defaultCreateTaskValues: CreateTaskSchema = {
-	title: '',
-	text: '',
-};
-
-const omitToUpdateTask = ['updated_at'] as const;
-type UpdateTaskFormData = Omit<TaskData, (typeof omitToUpdateTask)[number]>;
-export const updateTaskSchema = v.omit(taskSchema, omitToUpdateTask) satisfies v.GenericSchema<UpdateTaskFormData>;
-export type UpdateTaskSchema = v.InferInput<typeof updateTaskSchema>;
-export const defaultUpdateTaskValues: UpdateTaskSchema = {
-	id: 0,
 	title: '',
 	text: '',
 };
