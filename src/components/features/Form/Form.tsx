@@ -1,11 +1,11 @@
 import { $, component$, useStore } from "@builder.io/qwik";
 import { server$, useNavigate } from "@builder.io/qwik-city";
-import { apiCreate } from "@/_global/lib/api";
+import { createTask } from "@/server/db/tasks/createTask";
 import { defaultCreateTaskValues } from "@/_global/lib/validate";
 import type { CreateTaskSchema } from "@/_global/lib/validate";
 
 const createData = server$(async (newData: CreateTaskSchema) => {
-	await apiCreate('/tasks/create', newData);
+	await createTask(newData);
 });
 
 export default component$(() => {

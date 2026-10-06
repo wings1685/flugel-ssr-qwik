@@ -1,6 +1,7 @@
 import { $, component$, useSignal, useTask$ } from "@builder.io/qwik";
 import { server$, useNavigate } from "@builder.io/qwik-city";
-import { apiDelete, apiUpdate } from "@/_global/lib/api";
+import { updateTask } from "@/server/db/tasks/updateTask";
+import { deleteTask } from "@/server/db/tasks/deleteTask";
 import type { TaskItem } from "@/server/db/types";
 import type { PageProps } from "@/_global/lib/types";
 
@@ -9,11 +10,11 @@ type DataId = TaskItem['id'];
 const editData = server$(async (id: DataId, data?: TaskItem) => {
 	if (!data) throw new Error('Task Not Found.');
 
-	await apiUpdate(`/tasks/update/${id}`, data);
+	await updateTask(data);
 });
 
 const deleteData = server$(async (id: DataId) => {
-	await apiDelete(`/tasks/delete/${id}`);
+	await deleteTask({ id });
 });
 
 export default component$((props: PageProps) => {
