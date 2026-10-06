@@ -1,5 +1,5 @@
 import * as v from "valibot";
-import type { TaskData } from "@/server/db/types";
+import type { TaskDrizzleSchema, TaskDetailDrizzleSchema } from "@/server/db/types";
 
 export const validateParse = <T>(schema: v.GenericSchema<T>, data: T) => {
 	v.parse(schema, data);
@@ -16,11 +16,15 @@ export const validateSafeParse = <T>(schema: v.GenericSchema<T>, data: T) => {
 	};
 };
 
+type UpdateTask = Omit<TaskDrizzleSchema, 'updated_at'>;
+type UpdateTaskDetail = Omit<TaskDetailDrizzleSchema, 'id' | 'task_id'>;
+type UpdateTaskForm = UpdateTask & UpdateTaskDetail;
+
 export const taskSchema = v.object({
 	id: v.pipe(v.number()),
 	title: v.pipe(v.string(), v.nonEmpty()),
 	text: v.pipe(v.string(), v.nonEmpty()),
-}) satisfies v.GenericSchema<TaskData>;
+}) satisfies v.GenericSchema<UpdateTaskForm>;
 export type TaskSchema = v.InferInput<typeof taskSchema>;
 export const defaultTaskValues: TaskSchema = {
 	id: 0,
@@ -39,7 +43,7 @@ export const defaultFindValues: FindSchema = {
 };
 
 const omitToCreateTask = ['id'] as const;
-type CreateTaskFormData = Omit<TaskData, (typeof omitToCreateTask)[number]>;
+type CreateTaskFormData = Omit<UpdateTask, (typeof omitToCreateTask)[number]>;
 export const createTaskSchema = v.omit(taskSchema, omitToCreateTask) satisfies v.GenericSchema<CreateTaskFormData>;
 export type CreateTaskSchema = v.InferInput<typeof createTaskSchema>;
 export const defaultCreateTaskValues: CreateTaskSchema = {
@@ -47,8 +51,9 @@ export const defaultCreateTaskValues: CreateTaskSchema = {
 	text: '',
 };
 
-type DeleteTaskFormData = Pick<TaskData, 'id'>;
-export const deleteTaskSchema = v.pick(taskSchema, ['id']) satisfies v.GenericSchema<DeleteTaskFormData>;
+const pickToDeleteTask = ['id'] as const;
+type DeleteTaskFormData = Pick<TaskDrizzleSchema, (typeof pickToDeleteTask)[number]>;
+export const deleteTaskSchema = v.pick(taskSchema, pickToDeleteTask) satisfies v.GenericSchema<DeleteTaskFormData>;
 export type DeleteTaskSchema = v.InferInput<typeof deleteTaskSchema>;
 export const defaultDeleteTaskValues: DeleteTaskSchema = {
 	id: 0,
