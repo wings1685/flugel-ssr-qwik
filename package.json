@@ -41,7 +41,6 @@
   },
   "dependencies": {
     "drizzle-orm": "^0.45.3",
-    "ky": "^2.1.0",
     "mysql2": "^3.24.5",
     "valibot": "^1.5.0"
   }
