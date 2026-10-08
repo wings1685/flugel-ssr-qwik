@@ -14,7 +14,7 @@ export default component$(() => {
     <QwikCityProvider>
       <head>
         <meta charset="utf-8" />
-		<title>SSR Test</title>
+		<title>Qwik SSR Test</title>
         <RouterHead />
       </head>
       <body lang="ja">

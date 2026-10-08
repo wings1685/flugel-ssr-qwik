@@ -1,19 +1,16 @@
 import { eq, like, asc, desc } from "drizzle-orm";
 import { db } from "../";
 import { task, taskDetail } from "../schema";
-import { defaultFindValues, findSchema, validateParse } from "@/_global/lib/validate";
+import { defaultFindValues } from "@/_global/lib/validate";
 import type { FindSchema } from "@/_global/lib/validate";
 
 export const buildFindQuery = (search: string) => {
 	const params = new URLSearchParams(search);
-	const findQuery = {
+
+	return {
 		title: params.get('title') ?? defaultFindValues.title,
 		sort: params.get('sort') ?? defaultFindValues.sort,
 	} as FindSchema;
-
-	validateParse(findSchema, findQuery);
-
-	return findQuery;
 };
 
 export const fetchTasks = async (findQuery: FindSchema) => {
