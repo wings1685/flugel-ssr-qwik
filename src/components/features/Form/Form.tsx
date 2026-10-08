@@ -17,7 +17,7 @@ export default component$(() => {
 		await createData(newData);
 
 		Object.assign(newData, defaultCreateValues);
-		await navigate('/', { forceReload: true });
+		await navigate();
 	});
 
 	return (

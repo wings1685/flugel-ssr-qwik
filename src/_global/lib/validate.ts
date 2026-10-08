@@ -20,8 +20,8 @@ type UpdateTask = Omit<TaskDrizzleSchema, 'updated_at'>;
 type UpdateTaskDetail = Omit<TaskDetailDrizzleSchema, 'id' | 'task_id'>;
 type UpdateTaskForm = UpdateTask & UpdateTaskDetail;
 
-export const taskSchema = v.object({
-	id: v.pipe(v.number()),
+export const taskSchema = v.strictObject({
+	id: v.number(),
 	title: v.pipe(v.string(), v.nonEmpty()),
 	text: v.pipe(v.string(), v.nonEmpty()),
 }) satisfies v.GenericSchema<UpdateTaskForm>;

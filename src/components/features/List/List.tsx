@@ -32,13 +32,13 @@ export default component$((props: Props) => {
 		const data = tasks.value.find(d => d.id === id);
 		await editData(data);
 
-		await navigate('/', { forceReload: true });
+		await navigate();
 	});
 
 	const handleDelete$ = $(async (id: DataId) => {
 		await deleteData(id);
 
-		await navigate('/', { forceReload: true });
+		await navigate();
 	});
 
 	return (
