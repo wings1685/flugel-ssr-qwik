@@ -9,8 +9,11 @@
   "type": "module",
   "scripts": {
     "build": "qwik build",
+    "build:ssg": "VITE_BUILD_MODE=ssg qwik build",
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
+    "build.preview:ssg": "VITE_BUILD_MODE=ssg vite build --ssr src/entry.preview.tsx",
+    "build.server": "qwik check-client src dist && vite build -c adapters/static/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
     "deploy": "echo 'Run \"npm run qwik add\" to install a server adapter'",
     "dev": "vite --mode ssr",
@@ -19,6 +22,7 @@
     "fmt.check": "prettier --check .",
     "lint": "eslint \"src/**/*.ts*\"",
     "preview": "qwik build preview && vite preview --open",
+    "preview:ssg": "npm run build:ssg && npx serve dist",
     "start": "vite --open --mode ssr",
     "qwik": "qwik"
   },

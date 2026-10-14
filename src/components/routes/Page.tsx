@@ -9,10 +9,10 @@ type Props = ListProps & {
 
 export default component$((props: Props) => {
 	return (
-		<main>
+		<div>
 			<Form />
 			<Find { ...props.findQuery } />
 			<List tasks={ props.tasks } />
-		</main>
+		</div>
 	)
 });
