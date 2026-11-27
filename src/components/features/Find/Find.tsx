@@ -1,5 +1,5 @@
-import { component$ } from "@builder.io/qwik";
-import { Form } from "@builder.io/qwik-city";
+import { component$ } from "@qwik.dev/core";
+import { Form } from "@qwik.dev/router";
 import type { FindSchema } from "@/_global/lib/validate";
 
 export default component$((props: FindSchema) => {

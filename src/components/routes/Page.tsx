@@ -1,4 +1,4 @@
-import { component$, type PropsOf } from "@builder.io/qwik";
+import { component$, type PropsOf } from "@qwik.dev/core";
 import { Form, Find, List } from "@/components/features";
 
 type ListProps = PropsOf<typeof List>;

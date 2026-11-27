@@ -1,5 +1,5 @@
 /* eslint-disable qwik/no-use-visible-task */
-import { component$, useVisibleTask$ } from "@builder.io/qwik";
+import { component$, useVisibleTask$ } from "@qwik.dev/core";
 import { buildingData, buildPerformance } from "../_models/performance";
 import type { LiPatternsProps } from "../_models/performance";
 

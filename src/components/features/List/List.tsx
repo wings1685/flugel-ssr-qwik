@@ -1,5 +1,5 @@
-import { $, component$, useSignal, useTask$ } from "@builder.io/qwik";
-import { server$, useNavigate } from "@builder.io/qwik-city";
+import { $, component$, useSignal, useTask$ } from "@qwik.dev/core";
+import { server$, useNavigate } from "@qwik.dev/router";
 import { updateTask } from "@/server/db/tasks/updateTask";
 import { deleteTask } from "@/server/db/tasks/deleteTask";
 import type { TaskSchema } from "@/_global/lib/validate";

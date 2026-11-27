@@ -27,21 +27,21 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "^1.20.1",
-    "@builder.io/qwik-city": "^1.20.1",
     "@eslint/js": "^9",
     "@types/node": "20.19.0",
     "drizzle-kit": "^0.31.11",
     "eslint": "9.32.0",
-    "eslint-plugin-qwik": "^1.20.1",
+    "eslint-plugin-qwik": "2.0.0-rc.5",
     "globals": "16.4.0",
     "prettier": "3.6.2",
     "typescript": "5.4.5",
     "typescript-eslint": "8.38.0",
     "typescript-plugin-css-modules": "latest",
     "undici": "*",
-    "vite": "7.3.1",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vite": "^8.0.0",
+    "vite-tsconfig-paths": "^4.2.1",
+    "@qwik.dev/router": "2.0.0-rc.5",
+    "@qwik.dev/core": "2.0.0-rc.5"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.3",

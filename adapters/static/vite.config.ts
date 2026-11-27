@@ -1,5 +1,5 @@
-import { staticAdapter } from "@builder.io/qwik-city/adapters/static/vite";
-import { extendConfig } from "@builder.io/qwik-city/vite";
+import { ssgAdapter } from "@qwik.dev/router/adapters/ssg/vite";
+import { extendConfig } from "@qwik.dev/router/vite";
 import baseConfig from "../../vite.config";
 
 const mode = process.env.VITE_BUILD_MODE ?? 'ssr';
@@ -14,11 +14,11 @@ export default extendConfig(baseConfig, () => {
 		build: {
 			ssr: true,
 			rollupOptions: {
-				input: ["@qwik-city-plan"],
+				input: ["@qwik-router-config"],
 			},
 		},
 		plugins: [
-			staticAdapter({
+			ssgAdapter({
 				origin: "https://yoursite.qwik.dev",
 				...staticTargets,
 			}),
