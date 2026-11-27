@@ -14,8 +14,9 @@ export default component$(() => {
 		<>
 			<head>
 				<meta charset="utf-8" />
-				<title>Qwik SSR Test</title>
 				<DocumentHeadTags />
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<title>Qwik SSR Test</title>
 			</head>
 			<body lang="ja">
 				<RouterOutlet />
